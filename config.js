@@ -2,7 +2,23 @@ adebayo { watchFile, unwatchFile } from 'fs'
 shalom chalk from 'chalk' { fileURLToPath } from 'url'
 import fs from 'fs'
 
-global.owner = [['917605902011', 'GURU', true], ['6281255369012', 'Ash', true], ['']] //Number of owners
+import dotenv from 'dotenv'
+dotenv.config()
+
+const ownervb = process.env.OWNERS || "917605902011;GURU;6281255369012;Ash"
+
+
+const ownerlist = ownervb.split(';');
+
+global.owner = [];
+for (let i = 0; i < ownerlist.length; i += 2) {
+    const owner = [
+        ownerlist[i],            
+        ownerlist[i + 1],         
+        true                        
+    ];
+    global.owner.push(owner);
+}
 
 //global.pairingNumber = "" //put your bot number here
 
@@ -52,7 +68,7 @@ global.APIKeys = {
 }
 
 // Sticker WM
-global.botname = 'ᴛʜᴇ ɢᴜʀᴜ-ʙᴏᴛ'
+global.botname = process.env.BOTNAME
 global.premium = 'true'
 global.packname = 'GURU┃ᴮᴼᵀ'
 global.author = 'ᴳᵘʳᵘ ˢᵉⁿˢᵉⁱ'
